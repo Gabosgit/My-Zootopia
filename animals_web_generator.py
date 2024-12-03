@@ -21,19 +21,21 @@ output = ''  # define an empty string
 
 for animal in animals_data:
     # append information to each string
+    output += '<li class="cards__item">\n'
     name = animal['name']
-    output += f"name: {name}\n"
+    output += f"name: {name}<br/>\n"
     diet = animal['characteristics']['diet']
-    output += f"diet: {diet}\n"
+    output += f"diet: {diet}<br/>\n"
     location = animal['locations'][0]
-    output += f"location: {location}\n"
+    output += f"location: {location}<br/>\n"
     try:
         animal_type = animal['characteristics']['type']
     except KeyError:
-        output += f"\n"
+        output += f"<br/>\n"
     else:
-        output += f"type: {animal_type}\n\n"
-#print(output)
+        output += f"type: {animal_type}<br/>\n"
+    output += '</li>\n'
+print(output)
 
 new_html_template = template_html.replace('__REPLACE_ANIMALS_INFO__', output)
 #print(new_html_template)

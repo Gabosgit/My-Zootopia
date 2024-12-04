@@ -27,16 +27,18 @@ def serialize_animal(animal_obj):
     except KeyError:
         animal_type = f""
     else:
-        animal_type = f'\t\t\t\t\t<strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n'
+        animal_type = f'\t\t\t\t\t\t<li class="info_line"><strong>Type:</strong> {animal["characteristics"]["type"]}</li>\n'
     output_line = ''  # define an empty string
     # append information to each string
     output_line += '\n'
     output_line += '\t\t\t<li class="cards__item">\n'
     output_line += f'\t\t\t\t<div class="card__title">{name}</div>\n'
     output_line += f'\t\t\t\t<p class="card__text">\n'
-    output_line += f'\t\t\t\t\t<strong>Diet:</strong> {diet}<br/>\n'
-    output_line += f'\t\t\t\t\t<strong>Location:</strong> {location}<br/>\n'
+    output_line += f'\t\t\t\t\t<ul class="info_list">\n'
+    output_line += f'\t\t\t\t\t\t<li class="info_line"><strong>Diet:</strong> {diet}</li>\n'
+    output_line += f'\t\t\t\t\t\t<li class="info_line"><strong>Location:</strong> {location}</li>\n'
     output_line += f'{animal_type}'
+    output_line += f'\t\t\t\t\t</ul>\n'
     output_line += '\t\t\t\t</p>\n'
     output_line += '\t\t\t</li>\n'
     return output_line

@@ -17,9 +17,8 @@ def load_html_template(file_path):
 template_html = load_html_template('animals_template.html')
 #print(template_html)
 
-output = ''  # define an empty string
-
-for animal in animals_data:
+def serialize_animal(animal_obj):
+    """handle a single animal serialization"""
     name = animal['name']
     diet = animal['characteristics']['diet']
     location = animal['locations'][0]
@@ -29,19 +28,24 @@ for animal in animals_data:
         animal_type = f""
     else:
         animal_type = f'\t\t\t\t\t<strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n'
-
+    output_line = ''  # define an empty string
     # append information to each string
-    output += '\n'
-    output += '\t\t\t<li class="cards__item">\n'
-    output += f'\t\t\t\t<div class="card__title">{name}</div>\n'
-    output += f'\t\t\t\t<p class="card__text">\n'
-    output += f'\t\t\t\t\t<strong>Diet:</strong> {diet}<br/>\n'
-    output += f'\t\t\t\t\t<strong>Location:</strong> {location}<br/>\n'
-    output += f'{animal_type}'
-    output += '\t\t\t\t</p>\n'
-    output += '\t\t\t</li>\n'
+    output_line += '\n'
+    output_line += '\t\t\t<li class="cards__item">\n'
+    output_line += f'\t\t\t\t<div class="card__title">{name}</div>\n'
+    output_line += f'\t\t\t\t<p class="card__text">\n'
+    output_line += f'\t\t\t\t\t<strong>Diet:</strong> {diet}<br/>\n'
+    output_line += f'\t\t\t\t\t<strong>Location:</strong> {location}<br/>\n'
+    output_line += f'{animal_type}'
+    output_line += '\t\t\t\t</p>\n'
+    output_line += '\t\t\t</li>\n'
+    return output_line
 
-print(output)
+
+output = ''
+for animal in animals_data:
+    output += serialize_animal(animal)
+#print(output)
 
 new_html_template = template_html.replace('__REPLACE_ANIMALS_INFO__', output)
 #print(new_html_template)

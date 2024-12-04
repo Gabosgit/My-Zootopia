@@ -20,21 +20,27 @@ template_html = load_html_template('animals_template.html')
 output = ''  # define an empty string
 
 for animal in animals_data:
-    # append information to each string
-    output += '<li class="cards__item">\n'
     name = animal['name']
-    output += f"name: {name}<br/>\n"
     diet = animal['characteristics']['diet']
-    output += f"diet: {diet}<br/>\n"
     location = animal['locations'][0]
-    output += f"location: {location}<br/>\n"
     try:
-        animal_type = animal['characteristics']['type']
+        animal['characteristics']['type']
     except KeyError:
-        output += f"<br/>\n"
+        animal_type = f""
     else:
-        output += f"type: {animal_type}<br/>\n"
-    output += '</li>\n'
+        animal_type = f'\t\t\t\t\t<strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n'
+
+    # append information to each string
+    output += '\n'
+    output += '\t\t\t<li class="cards__item">\n'
+    output += f'\t\t\t\t<div class="card__title">{name}</div>\n'
+    output += f'\t\t\t\t<p class="card__text">\n'
+    output += f'\t\t\t\t\t<strong>Diet:</strong> {diet}<br/>\n'
+    output += f'\t\t\t\t\t<strong>Location:</strong> {location}<br/>\n'
+    output += f'{animal_type}'
+    output += '\t\t\t\t</p>\n'
+    output += '\t\t\t</li>\n'
+
 print(output)
 
 new_html_template = template_html.replace('__REPLACE_ANIMALS_INFO__', output)
